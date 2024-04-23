@@ -1,0 +1,15 @@
+{
+  "domain": "roth_touchline",
+  "name": "roth_touchline",
+  "codeowners": [
+    "@wilderbridge"
+  ],
+  "config_flow": true,
+  "dependencies": [],
+  "documentation": "https://github.com/wilderbridge/roth_touchline",
+  "homekit": {},
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "ssdp": [],
+  "zeroconf": []
+}

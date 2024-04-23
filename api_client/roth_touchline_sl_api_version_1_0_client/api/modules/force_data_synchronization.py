@@ -1,0 +1,185 @@
+from http import HTTPStatus
+from typing import Any, Dict, List, Optional, Union, cast
+
+import httpx
+
+from ...client import AuthenticatedClient, Client
+from ...types import Response, UNSET
+from ... import errors
+
+from typing import cast
+from typing import Dict
+from ...models.force_data_synchronization_response_406 import ForceDataSynchronizationResponse406
+
+
+
+def _get_kwargs(
+    user_id: int,
+    module_udid: int,
+
+) -> Dict[str, Any]:
+    
+
+    
+
+    
+
+    _kwargs: Dict[str, Any] = {
+        "method": "post",
+        "url": "/users/{user_id}/modules/{module_udid}/force_data_sync".format(user_id=user_id,module_udid=module_udid,),
+    }
+
+
+    return _kwargs
+
+
+def _parse_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Optional[Union[Any, ForceDataSynchronizationResponse406]]:
+    if response.status_code == HTTPStatus.OK:
+        response_200 = cast(Any, None)
+        return response_200
+    if response.status_code == HTTPStatus.NOT_ACCEPTABLE:
+        response_406 = ForceDataSynchronizationResponse406.from_dict(response.json())
+
+
+
+        return response_406
+    if client.raise_on_unexpected_status:
+        raise errors.UnexpectedStatus(response.status_code, response.content)
+    else:
+        return None
+
+
+def _build_response(*, client: Union[AuthenticatedClient, Client], response: httpx.Response) -> Response[Union[Any, ForceDataSynchronizationResponse406]]:
+    return Response(
+        status_code=HTTPStatus(response.status_code),
+        content=response.content,
+        headers=response.headers,
+        parsed=_parse_response(client=client, response=response),
+    )
+
+
+def sync_detailed(
+    user_id: int,
+    module_udid: int,
+    *,
+    client: Union[AuthenticatedClient, Client],
+
+) -> Response[Union[Any, ForceDataSynchronizationResponse406]]:
+    """ Force Data Synchronization
+
+    Args:
+        user_id (int):
+        module_udid (int):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[Any, ForceDataSynchronizationResponse406]]
+     """
+
+
+    kwargs = _get_kwargs(
+        user_id=user_id,
+module_udid=module_udid,
+
+    )
+
+    response = client.get_httpx_client().request(
+        **kwargs,
+    )
+
+    return _build_response(client=client, response=response)
+
+def sync(
+    user_id: int,
+    module_udid: int,
+    *,
+    client: Union[AuthenticatedClient, Client],
+
+) -> Optional[Union[Any, ForceDataSynchronizationResponse406]]:
+    """ Force Data Synchronization
+
+    Args:
+        user_id (int):
+        module_udid (int):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[Any, ForceDataSynchronizationResponse406]
+     """
+
+
+    return sync_detailed(
+        user_id=user_id,
+module_udid=module_udid,
+client=client,
+
+    ).parsed
+
+async def asyncio_detailed(
+    user_id: int,
+    module_udid: int,
+    *,
+    client: Union[AuthenticatedClient, Client],
+
+) -> Response[Union[Any, ForceDataSynchronizationResponse406]]:
+    """ Force Data Synchronization
+
+    Args:
+        user_id (int):
+        module_udid (int):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Response[Union[Any, ForceDataSynchronizationResponse406]]
+     """
+
+
+    kwargs = _get_kwargs(
+        user_id=user_id,
+module_udid=module_udid,
+
+    )
+
+    response = await client.get_async_httpx_client().request(
+        **kwargs
+    )
+
+    return _build_response(client=client, response=response)
+
+async def asyncio(
+    user_id: int,
+    module_udid: int,
+    *,
+    client: Union[AuthenticatedClient, Client],
+
+) -> Optional[Union[Any, ForceDataSynchronizationResponse406]]:
+    """ Force Data Synchronization
+
+    Args:
+        user_id (int):
+        module_udid (int):
+
+    Raises:
+        errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
+        httpx.TimeoutException: If the request takes longer than Client.timeout.
+
+    Returns:
+        Union[Any, ForceDataSynchronizationResponse406]
+     """
+
+
+    return (await asyncio_detailed(
+        user_id=user_id,
+module_udid=module_udid,
+client=client,
+
+    )).parsed
